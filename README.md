@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOOgle
 
-## Getting Started
+Un clone du jeu de mots Boggle, développé avec Next.js, React et TypeScript — portage web d'un projet C# original (algorithmes de recherche récursive).
 
-First, run the development server:
+
+🎮 **[Jouer à la démo](https://boogle-demo.vercel.app/)**
+
+## Règles
+
+Un plateau de lettres est généré aléatoirement. Trouve un maximum de mots en reliant des lettres adjacentes (horizontalement, verticalement ou en diagonale) avant la fin du chrono. Chaque lettre ne peut être utilisée qu'une fois par mot.
+
+## Fonctionnalités
+
+- Plateau de 4×4 à 6×6, durée de partie configurable
+- Dictionnaire de plusieurs dizaines de milliers de mots français (généré via le paquet [`an-array-of-french-words`](https://www.npmjs.com/package/an-array-of-french-words), filtré et scoré à la volée par `scripts/generate-words.js`)
+- Score calculé selon la valeur des lettres (façon Scrabble) + un bonus de longueur
+- Le chemin du mot validé s'illumine sur le plateau, preuve visuelle que l'algorithme de recherche a bien fonctionné
+- Nuage de mots généré en fin de partie à partir des mots trouvés
+
+## Stack technique
+
+- **Next.js** (App Router)
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+
+## Lancer le projet en local
 
 ```bash
+git clone https://github.com/PierreBoudraa/boogle-demo.git
+cd boogle-demo
+npm install
+node scripts/generate-words.js   # génère data/mots.json
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000) dans ton navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Ce que ce projet démontre
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Portage d'algorithmes récursifs du C# vers TypeScript : recherche dichotomique dans un dictionnaire trié, et recherche de mot sur une grille par backtracking en 8 directions
+- Génération procédurale de plateau et calcul de score
+- Rendu Canvas (nuage de mots)
